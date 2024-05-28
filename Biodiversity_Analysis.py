@@ -66,8 +66,12 @@ print(threat_percentages)
 threat_percentages['proportion'] = (threat_percentages.threatened)/(threat_percentages.threatened.sum())
 threat_percentages.sort_values('proportion', ascending = False, inplace = True)
 # Plotting proportions by category
+category_labels = threat_percentages.index.tolist()
+for x in range(len(category_labels)):
+    category_labels[x] = category_labels[x].replace(' Plant', '\nPlant')
+
 threat_percentages.plot(kind = 'bar', y='proportion', legend = None, title = 'Proportion of Conservation Efforts by Wildlife Category', xlabel = 'Category', ylabel = 'Proportion')
-plt.xticks(range(len(threat_percentages.index)), ['Vascular\nPlant','Reptile','Amphibian','Fish','Mammal','Vascular\nPlant','Bird'], rotation=0)
+plt.xticks(range(len(threat_percentages.index)), category_labels, rotation=20)
 print(threat_percentages.proportion)
 plt.show(); plt.close()
 
